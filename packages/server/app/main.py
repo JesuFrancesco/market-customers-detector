@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 # from fastapi.middleware.cors import CORSMiddleware
-from app.controller.ws_cv2 import socket_app
+from app.controller.socketio_cv2 import socket_app
 
 app = FastAPI()
 

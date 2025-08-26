@@ -1,5 +1,5 @@
 import socketio
-from app.service.ws_cv2 import stream_mp4
+from app.service.socketio_cv2 import stream_mp4
 # from app.service.ws_cv2 import stream_webcam
 
 sio = socketio.AsyncServer(
