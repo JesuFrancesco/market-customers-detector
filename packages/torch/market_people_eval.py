@@ -1,10 +1,15 @@
 import sys
+from typing import Optional
 from ultralytics import YOLO
-from models import YOLO11_MODEL_PATH, YOLOV8_FACE_MODEL_PATH
+from models import YOLO11_MODEL_PATH
 import cv2
 
-model = None
+model: Optional[YOLO] = None
+
 def handler():
+    if not model:
+        raise ValueError("¡Modelo no cargado!")
+    
     cap = cv2.VideoCapture(0)
 
     while True:
@@ -13,7 +18,7 @@ def handler():
             break
 
         # Run YOLO detection + tracking on the frame
-        results = model.track(frame, persist=True, show=False)
+        results = model.track(frame, persist=True, show=False, classes=[0])
 
         # Plot results on the frame
         annotated_frame = results[0].plot()
@@ -30,11 +35,6 @@ def handler():
 if __name__ == "__main__":
     args = sys.argv[1:]
 
-    if "--face" in args:
-        print("Using face model")
-        model = YOLO(YOLOV8_FACE_MODEL_PATH)
-    else:
-        print("Using COCO model")
-        model = YOLO(YOLO11_MODEL_PATH)
+    model = YOLO(YOLO11_MODEL_PATH)
 
     handler()
