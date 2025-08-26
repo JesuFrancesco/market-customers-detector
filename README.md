@@ -1,1 +1,1 @@
-# market-people-detector
+# market-customers-detector
