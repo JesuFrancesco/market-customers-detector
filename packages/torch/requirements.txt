@@ -1,5 +1,7 @@
 ultralytics
 opencv-python
+insightface
 # if using another gpu driver, ignore the following
+onnxruntime
 torch
 torchvision
