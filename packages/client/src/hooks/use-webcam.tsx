@@ -1,5 +1,5 @@
 // src/hooks/useWebcamStream.ts
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 export function useWebcamStream() {
@@ -27,5 +27,12 @@ export function useWebcamStream() {
     };
   }, []);
 
-  return { socket, frame };
+  const skipVideo = useCallback(() => {
+    if (socket) {
+      socket.emit("control", { action: "skip" });
+      console.log("Sent skip event");
+    }
+  }, [socket]);
+
+  return { socket, frame, skipVideo };
 }
