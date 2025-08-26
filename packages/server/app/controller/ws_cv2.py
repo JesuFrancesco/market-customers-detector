@@ -1,5 +1,5 @@
 import socketio
-from app.service.ws_webcam import stream_webcam
+from packages.server.app.service.ws_cv2 import stream_webcam
 
 sio = socketio.AsyncServer(
     async_mode="asgi",

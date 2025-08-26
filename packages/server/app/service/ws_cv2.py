@@ -3,8 +3,8 @@ import base64
 import asyncio
 from socketio import AsyncServer
 
-cap = cv2.VideoCapture(0)
 async def stream_webcam(sio: AsyncServer):
+    cap = cv2.VideoCapture(0)
     while True:
         success, frame = cap.read()
         if not success:
