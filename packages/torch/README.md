@@ -2,7 +2,7 @@
 
 ## Information
 
-Use the [gallery](./gallery/) directory to create folders with different ids
+Use the [gallery](./data/gallery/) directory to create folders with different ids
 
 ## References
 

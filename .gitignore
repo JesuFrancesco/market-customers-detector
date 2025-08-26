@@ -1,7 +1,7 @@
-packages/torch/captures/*.png
-packages/torch/gallery/*.png
-packages/torch/captures/*.jpg
-packages/torch/gallery/*.jpg
+packages/torch/data/captures/*.png
+packages/torch/data/gallery/*.png
+packages/torch/data/captures/*.jpg
+packages/torch/data/gallery/*.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
