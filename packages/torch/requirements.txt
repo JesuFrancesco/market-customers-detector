@@ -1,2 +1,5 @@
 ultralytics
 opencv-python
+# if using another gpu driver, ignore the following
+torch
+torchvision
