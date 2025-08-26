@@ -6,7 +6,11 @@ const RedirectButton: React.FC<{
   onClick: () => void;
 }> = ({ children, onClick }) => {
   return (
-    <Button className="text-2xl" variant={"outline"} onClick={onClick}>
+    <Button
+      className="flex flex-row items-center align-middle text-2xl"
+      variant={"default"}
+      onClick={onClick}
+    >
       {children}
     </Button>
   );

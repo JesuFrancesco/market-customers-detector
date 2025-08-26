@@ -2,14 +2,14 @@ import os
 import argparse
 import cv2
 from ultralytics import YOLO
-from models import YOLO11_MODEL_PATH
-from data import SAMPLE_VIDEOS_PATH
+from app.torch.models import YOLO11_MODEL_PATH
+from app.torch.data import SAMPLE_VIDEOS_PATH
 
 print("Loading YOLO model")
 model = YOLO(YOLO11_MODEL_PATH)
 if not model: raise ValueError("¡Modelo no pudo cargar!")
 
-def cv2_track_with_yolo(model: YOLO):
+async def cv2_track_with_yolo(cv2_window: bool = False):
     cap = cv2.VideoCapture(0)
     while True:
         ret, frame = cap.read()
@@ -23,15 +23,18 @@ def cv2_track_with_yolo(model: YOLO):
         annotated_frame = results[0].plot()
 
         # Display the annotated frame
-        cv2.imshow("YOLO Detection + Tracking", annotated_frame)
+        if cv2_window:
+            cv2.imshow("YOLO Detection + Tracking", annotated_frame)
 
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            break
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+        else:
+            yield annotated_frame
 
     cap.release()
     cv2.destroyAllWindows()
 
-def mp4_track_with_yolo(model: YOLO):
+async def mp4_track_with_yolo(cv2_window: bool = False):
     for video in os.listdir(SAMPLE_VIDEOS_PATH):
         if video.endswith(".mp4"):
             video_path = os.path.join(SAMPLE_VIDEOS_PATH, video)
@@ -48,10 +51,12 @@ def mp4_track_with_yolo(model: YOLO):
                 annotated_frame = results[0].plot()
 
                 # Display the annotated frame
-                cv2.imshow("YOLO Detection + Tracking", annotated_frame)
-
-                if cv2.waitKey(1) & 0xFF == ord("q"):
-                    break
+                if cv2_window:
+                    cv2.imshow("YOLO Detection + Tracking", annotated_frame)
+                    if cv2.waitKey(1) & 0xFF == ord("q"):
+                        break
+                else:
+                    yield annotated_frame
 
             cap.release()
 
@@ -67,9 +72,9 @@ if __name__ == "__main__":
 
     try:
         if args.cv2:
-            cv2_track_with_yolo(model)
+            cv2_track_with_yolo(cv2_window=True)
 
         elif args.mp4:
-            mp4_track_with_yolo(model)
+            mp4_track_with_yolo(cv2_window=True)
     except KeyboardInterrupt:
         print("¡Interrumpido por el usuario!")

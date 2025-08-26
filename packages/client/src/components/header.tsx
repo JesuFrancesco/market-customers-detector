@@ -1,7 +1,9 @@
 const Header = () => {
   return (
     <header className="flex flex-row justify-evenly">
-      <h1 className="text-2xl font-bold">Supermercados Lima</h1>
+      <a className="hover:cursor-pointer" href="#">
+        <h1 className="text-2xl font-bold">Supermercados Lima</h1>
+      </a>
       <nav>
         <ul className="flex space-x-4">
           <li>

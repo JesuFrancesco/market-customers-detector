@@ -1,7 +1,11 @@
-import React from "react";
+import { CustomersTable } from "./components/customers-table";
 
 const CustomersPage = () => {
-  return <div>CustomersPage</div>;
+  return (
+    <div className="p-4">
+      <CustomersTable />
+    </div>
+  );
 };
 
 export default CustomersPage;
