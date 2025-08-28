@@ -42,4 +42,4 @@ async def stream_mp4(sio: AsyncServer, sid: str = None, controls: dict = None):
                 frame_b64 = base64.b64encode(buffer).decode("utf-8")
                 await sio.emit("frame", {"image": frame_b64}, to=sid)
                 await asyncio.sleep(0.05) 
-        await asyncio.sleep(1)
+        # await asyncio.sleep(1)
