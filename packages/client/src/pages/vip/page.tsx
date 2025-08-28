@@ -1,7 +1,11 @@
-import React from "react";
+import VipsWebcamViewer from "./components/vips-webcam-viewer";
 
 const VipsPage = () => {
-  return <div>VipsPage</div>;
+  return (
+    <div className="p-4">
+      <VipsWebcamViewer />
+    </div>
+  );
 };
 
 export default VipsPage;

@@ -1,9 +1,9 @@
-import WebcamViewer from "./components/webcam-consumer";
+import MarketWebcamViewer from "./components/market-webcam-viewer";
 
 const MarketsPage = () => {
   return (
     <div className="p-4">
-      <WebcamViewer />
+      <MarketWebcamViewer />
     </div>
   );
 };

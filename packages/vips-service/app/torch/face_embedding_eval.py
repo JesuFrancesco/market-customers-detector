@@ -41,19 +41,56 @@ logger.info("Loading ArcFace embedding model...")
 arcface = get_model(ARCFACE_MODEL_PATH)
 arcface.prepare(ctx_id=ARCFACE_CTX)
 
+assert yolo is not None, "Failed to load YOLO model"
+assert arcface is not None, "Failed to load ArcFace model"
+
+# ==============================
 # Ensure capture and gallery directories
+# ==============================
 ensure_dir(CAPTURE_DIR)
 ensure_dir(GALLERY_DIR)
 
+# Preprocess gallery images to embeddings
+gallery = build_gallery(yolo, arcface, GALLERY_DIR)
+
 # == Async
 async def async_webcam_face_recognition():
-    logger.info("Not implemented")
-    pass
+    cap = cv2.VideoCapture(0)  # change index if needed
+    if not cap.isOpened():
+        logger.error("No se pudo conectar la cámara.")
+        return
+
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            logger.warning("[Warn] Frame grab failed.")
+            break
+
+        # Resize for speed if needed
+        h, w = frame.shape[:2]
+        if w > MAX_WIDTH:
+            scale = MAX_WIDTH / float(w)
+            frame = cv2.resize(frame, (int(w * scale), int(h * scale)))
+
+        
+        # Detect faces
+        faces = detect_faces(yolo, frame)
+
+        # Recognize each face
+        for f in faces:
+            aligned = align_face(frame, f)
+            if aligned is None:
+                continue
+            q = embed_face(arcface, aligned)
+            name, score = match_embedding(q, gallery)
+            draw_box_label(frame, f["xyxy"], name, score)
+
+        yield frame
+
+    cap.release()
 
 # == Not Async
 def webcam_face_recognition():
-    gallery = build_gallery(yolo, arcface, GALLERY_DIR)
-
     cap = cv2.VideoCapture(0)  # change index if needed
     if not cap.isOpened():
         logger.error("Could not open camera.")

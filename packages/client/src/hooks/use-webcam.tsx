@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
-export function useWebcamStream() {
+export function useWebcamStream(sioAddress: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [frame, setFrame] = useState<string | null>(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:8000", {
+    const newSocket = io(sioAddress, {
       path: "/sio",
     });
     setSocket(newSocket);

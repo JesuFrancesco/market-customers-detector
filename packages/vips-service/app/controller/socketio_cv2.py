@@ -1,7 +1,6 @@
 import socketio
-from app.service.socketio_cv2 import stream_mp4
+from app.service.socketio_cv2 import stream_mp4, stream_webcam
 from app.config import Config
-# from app.service.ws_cv2 import stream_webcam
 
 sio = socketio.AsyncServer(
     async_mode="asgi",
@@ -17,8 +16,8 @@ async def connect(sid, environ):
     print("Client connected:", sid)
     # Start background task
     controls[sid] = {"skip": False}
-    task = sio.start_background_task(stream_mp4, sio, sid, controls)
-    # task = sio.start_background_task(stream_webcam, sio, sid, controls)
+    # task = sio.start_background_task(stream_mp4, sio, sid, controls)
+    task = sio.start_background_task(stream_webcam, sio, sid, controls)
     events[sid] = task
 
 @sio.event

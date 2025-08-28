@@ -7,7 +7,7 @@ const RedirectButton: React.FC<{
 }> = ({ children, onClick }) => {
   return (
     <Button
-      className="flex flex-row items-center align-middle text-2xl"
+      className="flex flex-row items-center align-middle text-2xl hover:cursor-pointer"
       variant={"default"}
       onClick={onClick}
     >

@@ -10,7 +10,7 @@ function App() {
     <ThemeProvider>
       <div className="grid h-screen w-full grid-rows-[auto_1fr_auto]">
         <Header />
-        <main className="mx-auto max-w-3xl overflow-scroll">
+        <main className="mx-auto max-w-3xl">
           <RouterProvider router={router} />
         </main>
         <Footer />

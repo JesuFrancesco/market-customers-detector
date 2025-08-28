@@ -37,7 +37,7 @@ def webcam_track_with_yolo():
 
 def mp4_track_with_yolo(video_path: str):
     if not video_path.endswith(".mp4"):
-        raise ValueError("La extensión debe ser .mp4")
+        raise ValueError("La extensión del video debe ser .mp4")
     
     cap = cv2.VideoCapture(video_path)
     while True:
@@ -76,7 +76,6 @@ async def async_webcam_track_with_yolo():
         yield annotated_frame
 
     cap.release()
-    cv2.destroyAllWindows()
 
 async def async_mp4_track_with_yolo(video_path: str):
     if not video_path.endswith(".mp4"):
@@ -89,7 +88,7 @@ async def async_mp4_track_with_yolo(video_path: str):
             break
 
         # Run YOLO detection + tracking on the frame
-        results = model.track(frame, persist=True, show=False, classes=[0])
+        results = model.track(frame, persist=True, show=False, classes=[0], verbose=False)
 
         # Plot results on the frame
         annotated_frame = results[0].plot()
