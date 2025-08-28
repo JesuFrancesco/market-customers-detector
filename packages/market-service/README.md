@@ -2,7 +2,7 @@
 
 ## Information
 
-Use the [videos](./app/torch/data/videos/) directory to create folders with different ids
+Use the [videos](./app/torch/data/videos/) directory to place demo videos to perform detection on them
 
 ## Commands
 
@@ -18,7 +18,7 @@ python -m app.main
 # Usar WebCam
 python -m app.torch.market_customers_eval --webcam
 
-# Usar video MP4
+# Usar videos MP4
 python -m app.torch.market_customers_eval --mp4
 
 # Ayuda
