@@ -89,6 +89,41 @@ async def async_webcam_face_recognition():
 
     cap.release()
 
+async def async_video_face_recognition(video_path: str):
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        logger.error("No se pudo abrir el video.")
+        return
+
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            logger.warning("[Warn] Frame grab failed.")
+            break
+
+        # Resize for speed if needed
+        h, w = frame.shape[:2]
+        if w > MAX_WIDTH:
+            scale = MAX_WIDTH / float(w)
+            frame = cv2.resize(frame, (int(w * scale), int(h * scale)))
+
+        
+        # Detect faces
+        faces = detect_faces(yolo, frame)
+
+        # Recognize each face
+        for f in faces:
+            aligned = align_face(frame, f)
+            if aligned is None:
+                continue
+            q = embed_face(arcface, aligned)
+            name, score = match_embedding(q, gallery)
+            draw_box_label(frame, f["xyxy"], name, score)
+
+        yield frame
+
+    cap.release()
+
 # == Not Async
 def webcam_face_recognition():
     cap = cv2.VideoCapture(0)  # change index if needed

@@ -16,8 +16,8 @@ async def connect(sid, environ):
     print("Client connected:", sid)
     # Start background task
     controls[sid] = {"skip": False}
-    # task = sio.start_background_task(stream_mp4, sio, sid, controls)
-    task = sio.start_background_task(stream_webcam, sio, sid, controls)
+    task = sio.start_background_task(stream_mp4, sio, sid, controls)
+    # task = sio.start_background_task(stream_webcam, sio, sid, controls)
     events[sid] = task
 
 @sio.event
