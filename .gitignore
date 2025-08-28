@@ -19,7 +19,14 @@ dist/
 downloads/
 eggs/
 .eggs/
+
+# Ignore all directories named lib/
 lib/
+
+# But don't ignore packages/client/src/lib/ and its contents
+!packages/client/src/lib/
+!packages/client/src/lib/**
+
 lib64/
 parts/
 sdist/
