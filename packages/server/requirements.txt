@@ -1,3 +1,0 @@
-fastapi[standard]
-python-socketio[asgi]
-pydantic-settings

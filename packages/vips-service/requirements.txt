@@ -1,0 +1,12 @@
+# FastAPI
+fastapi[standard]
+python-socketio[asgi]
+pydantic-settings
+# CV
+ultralytics
+opencv-python
+insightface
+# if using another gpu driver, ignore the following
+onnxruntime
+torch
+torchvision

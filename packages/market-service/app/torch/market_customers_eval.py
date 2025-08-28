@@ -4,8 +4,11 @@ import cv2
 from ultralytics import YOLO
 from app.torch.models import YOLO11_MODEL_PATH
 from app.torch.data import SAMPLE_VIDEOS_PATH
+from app.logger import setup_logger
 
-print("Loading YOLO model")
+logger = setup_logger(__name__)
+
+logger.info("Loading YOLO model")
 model = YOLO(YOLO11_MODEL_PATH)
 if not model: raise ValueError("¡Modelo no pudo cargar!")
 
@@ -114,4 +117,4 @@ if __name__ == "__main__":
             [mp4_track_with_yolo(os.path.join(SAMPLE_VIDEOS_PATH, video)) for video in os.listdir(SAMPLE_VIDEOS_PATH) if video.endswith(".mp4")]
 
     except KeyboardInterrupt:
-        print("¡Interrumpido por el usuario!")
+        logger.warning("¡Interrumpido por el usuario!")

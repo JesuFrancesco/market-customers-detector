@@ -6,7 +6,9 @@ export function useWebcamStream() {
   const [frame, setFrame] = useState<string | null>(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:8000");
+    const newSocket = io("http://localhost:8000", {
+      path: "/sio",
+    });
     setSocket(newSocket);
 
     newSocket.on("connect", () => {

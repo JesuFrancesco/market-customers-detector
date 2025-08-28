@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 # from fastapi.middleware.cors import CORSMiddleware
 from app.controller.socketio_cv2 import socket_app
+from app.config import Config
 
 app = FastAPI()
 
@@ -10,7 +11,7 @@ app = FastAPI()
 #     allow_methods=["*"],
 #     allow_headers=["*"],
 # )
-app.mount("/", socket_app)
+app.mount(Config.SOCKETIO_PATH, socket_app)
 
 
 @app.get("/health")

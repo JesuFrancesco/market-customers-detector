@@ -1,3 +1,8 @@
+# FastAPI
+fastapi[standard]
+python-socketio[asgi]
+pydantic-settings
+# CV
 ultralytics
 opencv-python
 insightface

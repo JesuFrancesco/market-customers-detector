@@ -1,12 +1,13 @@
 import socketio
 from app.service.socketio_cv2 import stream_mp4
+from app.config import Config
 # from app.service.ws_cv2 import stream_webcam
 
 sio = socketio.AsyncServer(
     async_mode="asgi",
     cors_allowed_origins="*"
 )
-socket_app = socketio.ASGIApp(sio)
+socket_app = socketio.ASGIApp(sio, socketio_path=Config.SOCKETIO_PATH)
 
 events = {}
 controls = {}

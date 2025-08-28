@@ -1,4 +1,8 @@
-# fastapi-server
+# market-service
+
+## Information
+
+Use the [videos](./app/torch/data/videos/) directory to create folders with different ids
 
 ## Commands
 
@@ -20,3 +24,7 @@ python -m app.torch.market_customers_eval --mp4
 # Ayuda
 python -m app.torch.market_customers_eval --help
 ```
+
+## References
+
+- Yolov11 (COCO): https://github.com/ultralytics/assets
